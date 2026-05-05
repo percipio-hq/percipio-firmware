@@ -22,3 +22,15 @@
 //   { "E5F6G7H8", "Jacek" },
 // };
 // const int CARD_COUNT = 2;
+
+// GPIO pin assignments — see WIRING.md for full wiring diagram
+#define PIN_LED_GREEN   25
+#define PIN_LED_RED     32
+#define PIN_LED_BLUE    33
+
+#define PIN_RADAR_RX    13   // LD2450 TX → ESP32
+#define PIN_RADAR_TX    17   // ESP32 → LD2450 RX
+
+#define PIN_RFID_MISO   2
+#define PIN_RFID_CS     27
+#define PIN_RFID_RST    26
