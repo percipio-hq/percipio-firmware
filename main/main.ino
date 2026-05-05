@@ -32,10 +32,11 @@ void setup() {
 
   firebaseInit();
 
+  bme280Init();
+
   // Phases 2-3 — uncomment as each module is implemented
   // displayInit();
   // gestureInit();
-  // bme280Init();
   // rfidInit();
   // radarInit();
 
@@ -46,8 +47,7 @@ void loop() {
   if (millis() - lastSend >= SEND_INTERVAL) {
     lastSend = millis();
 
-    // Block 1: dummy data — replace with real sensor reads in Phase 2/3
-    SensorReading reading = { 22.4f, 48.0f, 1013.2f };
+    SensorReading reading = bme280Read();
     firebaseSendReading(reading);
   }
 

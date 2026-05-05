@@ -1,8 +1,19 @@
 #include "bme280.h"
-// Phase 2 — implementation pending (Adafruit BME280)
+#include <Wire.h>
+#include <Adafruit_BME280.h>
 
-void bme280Init() {}
+static Adafruit_BME280 bme;
+
+void bme280Init() {
+  if (!bme.begin(0x76)) {
+    Serial.println("BME280 not found at 0x76");
+  }
+}
 
 SensorReading bme280Read() {
-  return { 0.0f, 0.0f, 0.0f };
+  return {
+    bme.readTemperature(),
+    bme.readHumidity(),
+    bme.readPressure() / 100.0f
+  };
 }
