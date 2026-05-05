@@ -11,8 +11,8 @@ Select **NodeMCU-32s** in Arduino IDE (under ESP32 Arduino).
 - SparkFun APDS9960
 - MFRC522
 - Adafruit BME280
-- Firebase Arduino Client Library for ESP32 (mobizt)
 - ArduinoJson
+- Firebase: uses Firestore REST API via built-in HTTPClient — no extra library needed
 - UniversalTelegramBot
 
 ## File structure
