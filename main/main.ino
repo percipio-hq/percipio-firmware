@@ -33,9 +33,10 @@ void setup() {
   firebaseInit();
 
   bme280Init();
+  displayInit();
+  displaySetStatus(true, false); // WiFi ok, DB not yet confirmed
 
-  // Phases 2-3 — uncomment as each module is implemented
-  // displayInit();
+  // Phase 3 — uncomment as each module is implemented
   // gestureInit();
   // rfidInit();
   // radarInit();
@@ -49,9 +50,12 @@ void loop() {
 
     SensorReading reading = bme280Read();
     firebaseSendReading(reading);
+    displayUpdateEnv(reading);
+    displaySetStatus(WiFi.status() == WL_CONNECTED, true);
   }
 
-  // Phase 2-3 — uncomment as implemented
+  displayLoop();
+
+  // Phase 3 — uncomment as implemented
   // gestureLoop();
-  // displayLoop();
 }
