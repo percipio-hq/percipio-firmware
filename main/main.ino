@@ -34,10 +34,10 @@ void setup() {
 
   bme280Init();
   displayInit();
-  displaySetStatus(true, false); // WiFi ok, DB not yet confirmed
+  displaySetStatus(true, false);
+  gestureInit();
 
   // Phase 3 — uncomment as each module is implemented
-  // gestureInit();
   // rfidInit();
   // radarInit();
 
@@ -54,8 +54,6 @@ void loop() {
     displaySetStatus(WiFi.status() == WL_CONNECTED, true);
   }
 
+  gestureLoop();
   displayLoop();
-
-  // Phase 3 — uncomment as implemented
-  // gestureLoop();
 }

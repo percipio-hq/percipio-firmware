@@ -173,6 +173,12 @@ void displayNextScreen() {
   lastRedraw = millis() - REDRAW_MS;
 }
 
+void displayPrevScreen() {
+  currentScreen = (currentScreen + 2) % 3;
+  lastRotate = millis();
+  lastRedraw = millis() - REDRAW_MS;
+}
+
 void displayUpdateEnv(const SensorReading& r) {
   envData = r;
 }

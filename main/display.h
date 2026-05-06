@@ -4,6 +4,7 @@
 void displayInit();
 void displayLoop();
 void displayNextScreen();
+void displayPrevScreen();
 void displayUpdateEnv(const SensorReading& r);
 void displayUpdateRadar(const RadarData& d);
 void displayUpdateRfid(const RfidEvent& e);
