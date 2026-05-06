@@ -37,8 +37,9 @@ void setup() {
   displaySetStatus(true, false);
   gestureInit();
 
-  // Phase 3 — uncomment as each module is implemented
-  // rfidInit();
+  rfidInit();
+
+  // Phase 3 — uncomment when radar is implemented
   // radarInit();
 
   Serial.println("[Percipio] ready");
@@ -56,4 +57,10 @@ void loop() {
 
   gestureLoop();
   displayLoop();
+
+  RfidEvent evt = rfidLoop();
+  if (evt.uid[0] != '\0') {
+    firebaseSendRfid(evt);
+    displayUpdateRfid(evt);
+  }
 }
