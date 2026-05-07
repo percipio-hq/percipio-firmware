@@ -8,7 +8,7 @@
 static MFRC522 mfrc(PIN_RFID_CS, PIN_RFID_RST);
 
 void rfidInit() {
-  SPI.begin();
+  SPI.begin(18, PIN_RFID_MISO, 19, PIN_RFID_CS); // SCK=18, MISO=2, MOSI=19
   mfrc.PCD_Init();
   Serial.println("[rfid] MFRC522 OK");
 }
