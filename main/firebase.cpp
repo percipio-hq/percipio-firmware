@@ -79,6 +79,20 @@ bool firebaseSendRadar(const RadarData& d) {
   return postDocument("radar_targets", body);
 }
 
+bool firebaseSendStatus(const DeviceStatus& s) {
+  StaticJsonDocument<256> doc;
+  JsonObject f = doc.createNestedObject("fields");
+  f["online"]["booleanValue"]     = true;
+  f["bme280_ok"]["booleanValue"]  = s.bme280_ok;
+  f["rfid_ok"]["booleanValue"]    = s.rfid_ok;
+  f["radar_ok"]["booleanValue"]   = s.radar_ok;
+  f["updated_at"]["timestampValue"] = timestamp();
+
+  String body;
+  serializeJson(doc, body);
+  return postDocument("device_status", body);
+}
+
 bool firebaseSendRfid(const RfidEvent& e) {
   StaticJsonDocument<256> doc;
   JsonObject f = doc.createNestedObject("fields");

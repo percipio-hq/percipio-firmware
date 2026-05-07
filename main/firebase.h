@@ -23,7 +23,14 @@ struct RfidEvent {
   bool        authorized;
 };
 
+struct DeviceStatus {
+  bool bme280_ok;
+  bool rfid_ok;
+  bool radar_ok;
+};
+
 void firebaseInit();
 bool firebaseSendReading(const SensorReading& r);
 bool firebaseSendRadar(const RadarData& d);
 bool firebaseSendRfid(const RfidEvent& e);
+bool firebaseSendStatus(const DeviceStatus& s);

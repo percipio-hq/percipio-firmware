@@ -50,7 +50,12 @@ void loop() {
     SensorReading reading = bme280Read();
     firebaseSendReading(reading);
     displayUpdateEnv(reading);
-    displaySetStatus(WiFi.status() == WL_CONNECTED, true);
+
+    bool wifiOk = WiFi.status() == WL_CONNECTED;
+    displaySetStatus(wifiOk, true);
+
+    DeviceStatus status = { true, true, true };
+    firebaseSendStatus(status);
   }
 
   gestureLoop();
