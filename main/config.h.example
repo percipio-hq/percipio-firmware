@@ -17,11 +17,11 @@
 
 // RFID card mapping — fill in after first scan (read UID from Serial Monitor)
 // Format: { "UID_HEX", "Name" }
-// const char* CARD_MAP[][2] = {
+// static const char* CARD_MAP[][2] = {
 //   { "A1B2C3D4", "Mike" },
 //   { "E5F6G7H8", "Jacek" },
 // };
-// const int CARD_COUNT = 2;
+// static const int CARD_COUNT = 2;
 
 // GPIO pin assignments — see WIRING.md for full wiring diagram
 #define PIN_LED_GREEN   25
