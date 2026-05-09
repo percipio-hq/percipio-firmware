@@ -9,6 +9,7 @@
 // Speed unit: cm/s → divide by 100 for m/s
 
 static HardwareSerial radarSerial(2);
+static bool           radar_ok = false;
 
 static const int FRAME_LEN = 30;
 static uint8_t   buf[FRAME_LEN];
@@ -49,6 +50,7 @@ RadarData radarRead() {
       pos = 0;
       if (buf[28] != 0x55 || buf[29] != 0xCC) continue;
 
+      radar_ok = true;
       RadarData data = { 0, {} };
       for (int i = 0; i < 3; i++) {
         int      off   = 4 + i * 8;
@@ -66,3 +68,5 @@ RadarData radarRead() {
 
   return { -1, {} }; // no complete frame yet
 }
+
+bool radarIsOk() { return radar_ok; }

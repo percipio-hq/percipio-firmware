@@ -9,7 +9,8 @@
 #include "radar.h"
 #include "telegram.h"
 
-static unsigned long lastSend = 0;
+static unsigned long lastSend  = 0;
+static RadarData     lastRadar = { 0, {} };
 static const unsigned long SEND_INTERVAL = 10000; // ms
 
 void setup() {
@@ -44,6 +45,13 @@ void setup() {
 }
 
 void loop() {
+  // Drain UART every tick; keep latest frame for periodic Firebase send
+  RadarData radar = radarRead();
+  if (radar.count >= 0) {
+    lastRadar = radar;
+    displayUpdateRadar(radar);
+  }
+
   if (millis() - lastSend >= SEND_INTERVAL) {
     lastSend = millis();
 
@@ -54,10 +62,13 @@ void loop() {
     bool wifiOk = WiFi.status() == WL_CONNECTED;
     displaySetStatus(wifiOk, true);
 
-    DeviceStatus status = { true, true, true };
+    DeviceStatus status = { bme280IsOk(), rfidIsOk(), radarIsOk() };
     firebaseSendStatus(status);
+
+    firebaseSendRadar(lastRadar);
   }
 
+  ledUpdate();
   gestureLoop();
   displayLoop();
 
@@ -65,11 +76,5 @@ void loop() {
   if (evt.uid[0] != '\0') {
     firebaseSendRfid(evt);
     displayUpdateRfid(evt);
-  }
-
-  RadarData radar = radarRead();
-  if (radar.count >= 0) {
-    firebaseSendRadar(radar);
-    displayUpdateRadar(radar);
   }
 }

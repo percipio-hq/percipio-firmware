@@ -2,4 +2,5 @@
 #include "firebase.h"
 
 void      radarInit();
-RadarData radarRead(); // parses latest LD2450 UART frame
+bool      radarIsOk();  // true after first valid frame received
+RadarData radarRead();  // parses latest LD2450 UART frame

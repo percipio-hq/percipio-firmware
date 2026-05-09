@@ -11,6 +11,8 @@ void bme280Init() {
   else Serial.println("[bme280] OK");
 }
 
+bool bme280IsOk() { return bme_ok; }
+
 SensorReading bme280Read() {
   if (!bme_ok) return { 0.0f, 0.0f, 0.0f };
   return {

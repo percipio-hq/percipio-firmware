@@ -6,12 +6,18 @@
 #include <MFRC522.h>
 
 static MFRC522 mfrc(PIN_RFID_CS, PIN_RFID_RST);
+static bool    rfid_ok = false;
 
 void rfidInit() {
   SPI.begin(18, PIN_RFID_MISO, 19, PIN_RFID_CS); // SCK=18, MISO=2, MOSI=19
   mfrc.PCD_Init();
-  Serial.println("[rfid] MFRC522 OK");
+  byte ver = mfrc.PCD_GetVersion();
+  rfid_ok = (ver == 0x91 || ver == 0x92);
+  if (rfid_ok) Serial.printf("[rfid] MFRC522 OK (v%02X)\n", ver);
+  else          Serial.printf("[rfid] MFRC522 not found (ver=0x%02X)\n", ver);
 }
+
+bool rfidIsOk() { return rfid_ok; }
 
 static const char* lookupName(const char* uid) {
   for (int i = 0; i < CARD_COUNT; i++) {

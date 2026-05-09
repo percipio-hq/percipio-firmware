@@ -2,4 +2,5 @@
 #include "firebase.h"
 
 void          bme280Init();
-SensorReading bme280Read(); // returns temperature, humidity, pressure
+bool          bme280IsOk();
+SensorReading bme280Read(); // returns {0,0,0} if sensor not connected
