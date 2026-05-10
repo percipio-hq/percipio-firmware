@@ -30,12 +30,12 @@ main/
   telegram.h/.cpp     — bot notifications
   led.h/.cpp          — red / green / blue LED feedback
 test_sketches/
-  test_bme280.ino
-  test_rfid.ino
-  test_radar.ino
-  test_gesture.ino
-  test_display.ino
-  test_led.ino
+  test_bme280/test_bme280.ino
+  test_rfid/test_rfid.ino
+  test_radar/test_radar.ino
+  test_gesture/test_gesture.ino
+  test_display/test_display.ino
+  test_led/test_led.ino
 ```
 
 ## Config setup
@@ -45,13 +45,13 @@ cp main/config.h.example main/config.h
 Fill in WiFi credentials, Firebase API key, and Telegram tokens.
 
 ## Flash order (at lab session)
-1. `test_bme280.ino` → verify `T=22.4 H=48.0 P=1013.2` in Serial Monitor
-2. `test_rfid.ino` → verify card UID printed
-3. `test_display.ino` → verify screen lights up
-4. `test_gesture.ino` → verify LEFT/RIGHT/UP/DOWN detected
-5. `test_led.ino` → verify green / red blink / blue
-6. `test_radar.ino` → verify target X/Y/speed printed
-7. `main.ino` → full system
+1. `test_sketches/test_bme280/test_bme280.ino` → verify `T=22.4 H=48.0 P=1013.2` in Serial Monitor
+2. `test_sketches/test_rfid/test_rfid.ino` → verify card UID printed
+3. `test_sketches/test_display/test_display.ino` → verify screen lights up
+4. `test_sketches/test_gesture/test_gesture.ino` → verify LEFT/RIGHT detected
+5. `test_sketches/test_led/test_led.ino` → verify green / red blink / blue
+6. `test_sketches/test_radar/test_radar.ino` → verify target X/Y/speed printed
+7. `main/main.ino` → full system
 
 ## Key pin rules (ESP32)
 - GPIO 6–11: never use (connected to flash)
