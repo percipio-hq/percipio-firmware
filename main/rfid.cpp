@@ -9,9 +9,9 @@ static MFRC522 mfrc(PIN_RFID_CS, PIN_RFID_RST);
 static bool    rfid_ok = false;
 
 void rfidInit() {
-  SPI.begin(18, PIN_RFID_MISO, 19, PIN_RFID_CS); // SCK=18, MISO=2, MOSI=19
+  SPI.begin(PIN_RFID_SCK, PIN_RFID_MISO, PIN_RFID_MOSI, PIN_RFID_CS);
   mfrc.PCD_Init();
-  byte ver = mfrc.PCD_GetVersion();
+  byte ver = mfrc.PCD_ReadRegister(MFRC522::VersionReg);
   rfid_ok = (ver == 0x91 || ver == 0x92);
   if (rfid_ok) Serial.printf("[rfid] MFRC522 OK (v%02X)\n", ver);
   else          Serial.printf("[rfid] MFRC522 not found (ver=0x%02X)\n", ver);

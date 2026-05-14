@@ -31,6 +31,8 @@
 #define PIN_RADAR_RX    13   // LD2450 TX → ESP32
 #define PIN_RADAR_TX    17   // ESP32 → LD2450 RX
 
+#define PIN_RFID_SCK    14   // TTGO: GPIO18/19 are internal TFT pins
 #define PIN_RFID_MISO   2
+#define PIN_RFID_MOSI   15
 #define PIN_RFID_CS     27
 #define PIN_RFID_RST    26

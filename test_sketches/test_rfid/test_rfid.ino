@@ -1,14 +1,17 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
-#define PIN_RFID_CS  27
-#define PIN_RFID_RST 26
+#define PIN_RFID_SCK  14
+#define PIN_RFID_MISO  2
+#define PIN_RFID_MOSI 15
+#define PIN_RFID_CS   27
+#define PIN_RFID_RST  26
 
 MFRC522 mfrc(PIN_RFID_CS, PIN_RFID_RST);
 
 void setup() {
   Serial.begin(115200);
-  SPI.begin(18, 2, 19, PIN_RFID_CS); // SCK=18, MISO=2, MOSI=19
+  SPI.begin(PIN_RFID_SCK, PIN_RFID_MISO, PIN_RFID_MOSI, PIN_RFID_CS);
   mfrc.PCD_Init();
   Serial.println("MFRC522 OK — tap a card");
 }
