@@ -5,11 +5,12 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
-static MFRC522 mfrc(PIN_RFID_CS, PIN_RFID_RST);
-static bool    rfid_ok = false;
+static SPIClass rfidSPI(HSPI);
+static MFRC522  mfrc(PIN_RFID_CS, PIN_RFID_RST, &rfidSPI);
+static bool     rfid_ok = false;
 
 void rfidInit() {
-  SPI.begin(PIN_RFID_SCK, PIN_RFID_MISO, PIN_RFID_MOSI, PIN_RFID_CS);
+  rfidSPI.begin(PIN_RFID_SCK, PIN_RFID_MISO, PIN_RFID_MOSI, PIN_RFID_CS);
   mfrc.PCD_Init();
   byte ver = mfrc.PCD_ReadRegister(MFRC522::VersionReg);
   rfid_ok = (ver == 0x91 || ver == 0x92);
