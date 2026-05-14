@@ -1,7 +1,7 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
-#define PIN_RFID_SCK  14
+#define PIN_RFID_SCK  12
 #define PIN_RFID_MISO  2
 #define PIN_RFID_MOSI 15
 #define PIN_RFID_CS   27

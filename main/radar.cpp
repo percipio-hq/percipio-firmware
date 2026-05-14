@@ -18,7 +18,7 @@ static int       pos = 0;
 static const uint8_t HDR[] = { 0xAA, 0xFF, 0x03, 0x00 };
 
 void radarInit() {
-  radarSerial.begin(256000, SERIAL_8N1, PIN_RADAR_RX, PIN_RADAR_TX);
+  radarSerial.begin(256000, SERIAL_8N1, PIN_RADAR_RX, -1); // TX unused
   Serial.println("[radar] LD2450 UART started");
 }
 
