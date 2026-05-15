@@ -57,14 +57,14 @@ I2C address: `0x39`
 
 ## MFRC522 — RFID reader
 
-SPI, 3.3V. Shares VSPI bus with TFT (safe — TFT is write-only, no MISO line).
+SPI, 3.3V. Uses HSPI bus (GPIO 12/15) — VSPI is taken by the built-in TFT.
 
 | MFRC522 pin | Connects to |
 |---|---|
 | VCC (3.3V) | 3.3V |
 | GND | GND |
-| SCK | GPIO 18 (shared VSPI) |
-| MOSI | GPIO 19 (shared VSPI) |
+| SCK | GPIO 12 (HSPI) |
+| MOSI | GPIO 15 (HSPI) |
 | MISO | GPIO 2 |
 | CS (SDA) | GPIO 27 |
 | RST | GPIO 26 |
@@ -81,7 +81,7 @@ UART, 5V power, 3.3V logic (direct connect to ESP32, no level shifter needed).
 | VCC | 5V (USB pin) |
 | GND | GND |
 | TX | GPIO 13 (ESP32 receives) |
-| RX | GPIO 17 (ESP32 transmits) |
+| RX | not connected (firmware never sends commands to radar) |
 
 UART: 256000 baud, 8N1
 
